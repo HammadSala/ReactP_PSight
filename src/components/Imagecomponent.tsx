@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import '../hcomponent/imgcss.css'
 
 type Props = {
     primaryPath : string,
@@ -29,21 +30,16 @@ const Imagecomponent = ( { primaryPath, secondarPath  } : Props) => {
         if (imageRef.current) {
             const post = (imageRef?.current as HTMLElement).getBoundingClientRect();
             console.log(post);
-            return post.top >= 0 && post.bottom <= window.innerHeight;
+            return post.top <= 0 && post.bottom >= window.innerHeight;
         }
         return false;
     }
     return (
-        <>
-            {
-                loading ? <p>Please wait its loading</p> : <div>
-                    {
-                        <img src={inViews ? primaryPath : secondarPath}
-                            ref={imageRef} />
-                    }
-                </div>
-            }
-        </>
+ 
+                        <img  className="card-img-top" src={inViews ? primaryPath : secondarPath}
+                            ref={imageRef} 
+                            width="200" height="200"/>
+
     );
 
 }

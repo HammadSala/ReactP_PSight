@@ -8,10 +8,10 @@ const configValue = {
     showSpeakersSpeakingDay :  true
 }
 
-const configContext = React.createContext(configValue);
+export const configContext = React.createContext(configValue);
 
  type  Props  = {
-    page : string
+    page : string,
  }
 
  function pageToShow (page : string) {
