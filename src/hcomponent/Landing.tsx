@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Home from './Home';
 import Speakers from "./Speakers";
-import "../static/site.css";
+import "./imgcss.css"
+import Menu from "./Menu";
+import { Header } from "./Header";
 
 const configValue = {
     showSignUp : true,
@@ -28,8 +30,11 @@ const Landing = ( { page } : Props) => {
 
     return (
         <div>
-            Header, Singup comes header
+            <Header />
+            <Menu />
             <configContext.Provider value={configValue}>
+                {/* <Header />
+                <Menu /> */}
                 <div>{pageToShow(page)}</div>
             </configContext.Provider>
 

@@ -1,8 +1,9 @@
-import { useReducer, useState, useEffect, useContext, ChangeEvent, useCallback } from "react";
+import { useReducer, useState, useEffect, useContext, ChangeEvent } from "react";
 import sepeakersReducer from "../customhooks/speakersReducer";
 import speakerData from "../static/SpeakerData";
 import { configContext }  from './Landing'
 import SpeakerDetails from "./SpeakerDetails";
+import "./imgcss.css"
 
 export type SpeakerType = {
     id: number;
@@ -31,23 +32,23 @@ const Speakers = () => {
         (()=>{
             setIsLoading(true);
             new Promise<void>((resolve, reject) => {
-                //console.log("Pulling the data");
+                console.log("Pulling the data");
                 setTimeout( ()=>{ resolve()},2000)
             }).then(() =>{
                  
                 const speakerListServerFilter = speakerData.filter(({sat, sun}) =>{
                         return ((sepakingSunday && sun) || (speakingSaturday && sat));
                 })
-                //console.log(" sepakerLsiitSErverData", speakerListServerFilter);
+                console.log(" sepakerLsiitSErverData", speakerListServerFilter);
                 setIsLoading(false);
                 dispatch({ type: "setSpeakerList", data: speakerListServerFilter });
             });
             return () => {
-                //console.log("component cleanup here")
+                console.log("component cleanup here")
             }
             
         })
-        ,[]
+        ,[speakingSaturday, sepakingSunday]
     )
 
 
@@ -59,7 +60,7 @@ const Speakers = () => {
      }
     // the dispatch action are async so next render cyle only we can see the data, so demonstrated below for usefeect dependecny reffersh to see the log
     // useEffect(() => {
-    //     //console.log("From reducer", speakerList);
+    //     console.log("From reducer", speakerList);
     //   }, [speakerList]);
 
     const sepakerLsiitSErverDataSorted = isLoading ? [] :
@@ -71,11 +72,6 @@ const Speakers = () => {
             else 
                 return 0
         });
-
-    const onHeartFavoriteHandler = useCallback(( speker : SpeakerType) =>{
-        dispatch ({type: "favourite", data: speker})
-        
-    },[])
 
     return (
         <>
@@ -119,15 +115,15 @@ const Speakers = () => {
 
                     <div className="row">
                         <div className="card-deck">
-                            {sepakerLsiitSErverDataSorted.map((speakerData1 : SpeakerType) => {
-                                console.log("speker individual", speakerData1);
-                                return <SpeakerDetails
-                                    key={speakerData1.id}
-                                    speakerData1={speakerData1}
-                                    onHeartFavoriteHandler={onHeartFavoriteHandler(speakerData1)}
+                           
+                            {sepakerLsiitSErverDataSorted.map((speakerData : SpeakerType) => (
+                                <SpeakerDetails
+                                    key={speakerData.id}
+                                    speakerData={speakerData}
+                                    
 
                                 />
-                                })
+                            ))
                             }
                         </div>
                     </div>

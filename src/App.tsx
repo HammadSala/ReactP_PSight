@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './hcomponent/imgcss.css'
 import Landing from './hcomponent/Landing';
 // import Imagecomponent from './components/Imagecomponent';
 

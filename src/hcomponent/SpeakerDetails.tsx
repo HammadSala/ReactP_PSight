@@ -1,36 +1,38 @@
 import { SpeakerType } from "./Speakers";
 import Imagecomponent from "../components/Imagecomponent";
+import { useMemo } from "react";
+import "./imgcss.css"
 
 
 type Props = {
-    speakerData1 : SpeakerType,
-    onHeartFavoriteHandler: Function,
+    speakerData : SpeakerType,
+    // onHeartFavoriteHandler: Function,
 
 
 }
 
 
-const SpeakerDetails=   ( {speakerData1, onHeartFavoriteHandler  } : Props) =>{
+const SpeakerDetails=   ( {speakerData  } : Props) =>{
 
     //console.log("Speaker DEtails", speakerData);
     return (
         <div className="card col-4 cardmin">
             <Imagecomponent
                 
-                primaryPath={require(`../static/speakers/bw/Speaker-${speakerData1.id}.jpg`)}
-                secondarPath={require(`../static/speakers/Speaker-${speakerData1.id}.jpg`)}  
+                primaryPath={require(`../static/speakers/bw/Speaker-${speakerData.id}.jpg`)}
+                secondarPath={require(`../static/speakers/Speaker-${speakerData.id}.jpg`)}  
                 />
             <div className="card-body">
                 <h4 className="card-title">
                     <button
                         
-                        className={ speakerData1.favorite ? "heartredbutton" : "heartdarkbutton"}
-                        onClick={onHeartFavoriteHandler(speakerData1)}
+                        className={ speakerData.favorite ? "heartredbutton" : "heartdarkbutton"}
+                        // onClick={useMemo(()=>onHeartFavoriteHandler(speakerData1),[])}
                         >
                     </button>
-                    <span>{speakerData1.firstName}  {speakerData1.lastName}</span>
+                    <span>{speakerData.firstName}  {speakerData.lastName}</span>
                 </h4>
-                <span>{speakerData1.bio}</span>
+                <span>{speakerData.bio}</span>
 
             </div>
 

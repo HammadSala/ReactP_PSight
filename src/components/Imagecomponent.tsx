@@ -19,7 +19,7 @@ const Imagecomponent = ( { primaryPath, secondarPath  } : Props) => {
         window.addEventListener("scroll", scrollHandler);
             return () => window.removeEventListener("scroll", scrollHandler);
     }
-        ,[]
+        ,[loading]
     )
 
     function scrollHandler() {
@@ -29,14 +29,14 @@ const Imagecomponent = ( { primaryPath, secondarPath  } : Props) => {
     const inView = () => {
         if (imageRef.current) {
             const post = (imageRef?.current as HTMLElement).getBoundingClientRect();
-            console.log(post);
-            return post.top <= 0 && post.bottom >= window.innerHeight;
+            //console.log(post);
+            return post.top >= 0 && post.bottom <= window.innerHeight;
         }
         return false;
     }
     return (
  
-                        <img  className="card-img-top" src={inViews ? primaryPath : secondarPath}
+                        <img  className="card-img-top" src={inViews ? secondarPath :  primaryPath}
                             ref={imageRef} 
                             width="200" height="200"/>
 
